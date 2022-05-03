@@ -9,6 +9,10 @@ namespace AssessmentTwo
     [Serializable]
     internal class Information
     {
+        // 6.1 Create a separate class file to hold the four data items of the Data Structure
+        // (use the Data Structure Matrix as a guide).
+        // Use auto-implemented properties for the fields which must be of type “string”.
+        // Save the class as “Information.cs”.
         private string Name;
         private string Category;
         private string Structure;
