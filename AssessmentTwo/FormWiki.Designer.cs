@@ -109,13 +109,6 @@
             // comboBoxCategory
             // 
             this.comboBoxCategory.FormattingEnabled = true;
-            this.comboBoxCategory.Items.AddRange(new object[] {
-            "Array",
-            "List",
-            "Tree",
-            "Graphs",
-            "Abstract",
-            "Hash"});
             this.comboBoxCategory.Location = new System.Drawing.Point(95, 84);
             this.comboBoxCategory.Name = "comboBoxCategory";
             this.comboBoxCategory.Size = new System.Drawing.Size(135, 21);
@@ -269,6 +262,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Name = "FormWiki";
             this.Text = "Data Structures Wiki";
+            this.Load += new System.EventHandler(this.FormWiki_Load);
             this.groupBoxStructure.ResumeLayout(false);
             this.groupBoxStructure.PerformLayout();
             this.toolStrip1.ResumeLayout(false);

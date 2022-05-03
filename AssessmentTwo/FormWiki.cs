@@ -18,6 +18,7 @@ namespace AssessmentTwo
         }
         // 6.2 Create a global List<T> of type Information called Wiki.
         List<Information> Wiki = new List<Information>();
+        string[] categories = { "Array", "List", "Tree", "Graphs", "Abstract", "Hash" };
 
         // 6.3 Create a button method to ADD a new item to the list.
         // Use a TextBox for the Name input, ComboBox for the Category,
@@ -34,10 +35,16 @@ namespace AssessmentTwo
             DisplayAllData();
             statusStrip.Text = "New entry added.";
         }
-        // TODO: 6.4 Create and initialise a global string array
+        // 6.4 Create and initialise a global string array
         // with the six categories as indicated in the Data Structure Matrix.
         // Create a custom method to populate the ComboBox when the Form Load method is called.
-
+        private void FormWiki_Load(object sender, EventArgs e)
+        {
+            foreach (string cat in categories)
+            {
+                comboBoxCategory.Items.Add(cat);
+            }
+        }
         // TODO: 6.5 Create a custom ValidName method which will take a parameter string value
         // from the Textbox Name and returns a Boolean after checking for duplicates.
         // Use the built in List<T> method “Exists” to answer this requirement.
@@ -92,6 +99,7 @@ namespace AssessmentTwo
             radioButtonNonLin.Checked = false;
             textBoxDefinition.Clear();
         }
+
         // TODO: 6.13 Create a double click event on the Name TextBox to clear the TextBboxes, ComboBox and Radio button.
 
         // TODO: 6.14 Create two buttons for the manual open and save option;
