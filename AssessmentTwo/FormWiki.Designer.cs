@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
@@ -49,6 +50,7 @@
             this.listViewDisplay = new System.Windows.Forms.ListView();
             this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBoxStructure.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +62,7 @@
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 0;
             this.buttonAdd.Text = "Add";
+            this.toolTip1.SetToolTip(this.buttonAdd, "Add a new term to the wiki.");
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
@@ -105,6 +108,7 @@
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(135, 20);
             this.textBoxName.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.textBoxName, "Enter data structure name. Double-click to clear all input fields.");
             this.textBoxName.DoubleClick += new System.EventHandler(this.textBoxName_DoubleClick);
             // 
             // comboBoxCategory
@@ -114,6 +118,7 @@
             this.comboBoxCategory.Name = "comboBoxCategory";
             this.comboBoxCategory.Size = new System.Drawing.Size(135, 21);
             this.comboBoxCategory.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.comboBoxCategory, "Select a category from the available options.");
             // 
             // groupBoxStructure
             // 
@@ -296,6 +301,7 @@
         private System.Windows.Forms.ListView listViewDisplay;
         private System.Windows.Forms.ColumnHeader columnName;
         private System.Windows.Forms.ColumnHeader columnCategory;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

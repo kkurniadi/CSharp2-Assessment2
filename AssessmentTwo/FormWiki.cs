@@ -112,7 +112,7 @@ namespace AssessmentTwo
             textBoxDefinition.Clear();
         }
 
-        // TODO: 6.13 Create a double click event on the Name TextBox to clear the TextBoxes, ComboBox and Radio button.
+        // 6.13 Create a double click event on the Name TextBox to clear the TextBoxes, ComboBox and Radio button.
         private void textBoxName_DoubleClick(object sender, EventArgs e)
         {
             ResetInputs();
