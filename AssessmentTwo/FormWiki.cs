@@ -34,27 +34,17 @@ namespace AssessmentTwo
             DisplayAllData();
             statusStrip.Text = "New entry added.";
         }
+        // TODO: 6.4 Create and initialise a global string array
+        // with the six categories as indicated in the Data Structure Matrix.
+        // Create a custom method to populate the ComboBox when the Form Load method is called.
 
-        private void DisplayAllData()
-        {
-            listViewDisplay.Items.Clear();
-            foreach(Information info in Wiki)
-            {
-                ListViewItem lvi = new ListViewItem(info.getName());
-                lvi.SubItems.Add(info.getCategory());
-                listViewDisplay.Items.Add(lvi);
-            }
-        }
+        // TODO: 6.5 Create a custom ValidName method which will take a parameter string value
+        // from the Textbox Name and returns a Boolean after checking for duplicates.
+        // Use the built in List<T> method “Exists” to answer this requirement.
 
-        private void ResetInputs()
-        {
-            textBoxName.Clear();
-            comboBoxCategory.ResetText();
-            radioButtonLinear.Checked = false;
-            radioButtonNonLin.Checked = false;
-            textBoxDefinition.Clear();
-        }
-
+        // 6.6 Create two methods to highlight and return the values from the Radio button GroupBox.
+        // The first method must return a string value from the selected radio button (Linear or Non-Linear).
+        // The second method must send an integer index which will highlight an appropriate radio button.
         private string CheckRadioButtons()
         {
             if (radioButtonLinear.Checked)
@@ -64,5 +54,51 @@ namespace AssessmentTwo
             else
                 return "";
         }
+        // TODO: 6.7 Create a button method that will delete the currently selected record in the ListView.
+        // Ensure the user has the option to backout of this action by using a dialog box.
+        // Display an updated version of the sorted list at the end of this process.
+
+        // TODO: 6.8 Create a button method that will save the edited record of the currently selected item in the ListView.
+        // All the changes in the input controls will be written back to the list.
+        // Display an updated version of the sorted list at the end of this process.
+
+        // 6.9 Create a single custom method that will sort and then display
+        // the Name and Category from the wiki information in the list.
+        private void DisplayAllData()
+        {
+            Wiki.Sort();
+            listViewDisplay.Items.Clear();
+            foreach(Information info in Wiki)
+            {
+                ListViewItem lvi = new ListViewItem(info.getName());
+                lvi.SubItems.Add(info.getCategory());
+                listViewDisplay.Items.Add(lvi);
+            }
+        }
+        // TODO: 6.10 Create a button method that will use the builtin binary search to find a Data Structure name.
+        // If the record is found the associated details will populate
+        // the appropriate input controls and highlight the name in the ListView.
+        // At the end of the search process the search input TextBox must be cleared.
+
+        // TODO: 6.11 Create a ListView event so a user can select a Data Structure Name from the list of Names
+        // and the associated information will be displayed in the related text boxes combo box and radio button.
+
+        // 6.12 Create a custom method that will clear and reset the TextBoxes, ComboBox and Radio button
+        private void ResetInputs()
+        {
+            textBoxName.Clear();
+            comboBoxCategory.ResetText();
+            radioButtonLinear.Checked = false;
+            radioButtonNonLin.Checked = false;
+            textBoxDefinition.Clear();
+        }
+        // TODO: 6.13 Create a double click event on the Name TextBox to clear the TextBboxes, ComboBox and Radio button.
+
+        // TODO: 6.14 Create two buttons for the manual open and save option;
+        // this must use a dialog box to select a file or rename a saved file.
+        // All Wiki data is stored/retrieved using a binary file format.
+
+        // TODO: 6.15 The Wiki application will save data when the form closes.
+
     }
 }
