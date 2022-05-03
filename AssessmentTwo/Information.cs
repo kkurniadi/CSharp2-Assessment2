@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AssessmentTwo
 {
     [Serializable]
-    internal class Information
+    internal class Information : IComparable<Information>
     {
         // 6.1 Create a separate class file to hold the four data items of the Data Structure
         // (use the Data Structure Matrix as a guide).
@@ -67,6 +67,11 @@ namespace AssessmentTwo
         public void setDefinition(string newDefinition)
         {
             Definition = newDefinition;
+        }
+
+        public int CompareTo(Information other)
+        {
+            return Name.CompareTo(other.getName());
         }
     }
 }
