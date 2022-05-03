@@ -26,14 +26,17 @@ namespace AssessmentTwo
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             Information info = new Information();
-            info.setName(textBoxName.Text);
-            info.setCategory(comboBoxCategory.SelectedItem.ToString());
-            info.setStructure(CheckRadioButtons());
-            info.setDefinition(textBoxDefinition.Text);
-            Wiki.Add(info);
-            ResetInputs();
-            DisplayAllData();
-            statusStrip.Text = "New entry added.";
+            if (ValidName(textBoxName.Text))
+            {
+                info.setName(textBoxName.Text);
+                info.setCategory(comboBoxCategory.SelectedItem.ToString());
+                info.setStructure(CheckRadioButtons());
+                info.setDefinition(textBoxDefinition.Text);
+                Wiki.Add(info);
+                ResetInputs();
+                DisplayAllData();
+                statusStrip.Text = "New entry added.";
+            }
         }
         // 6.4 Create and initialise a global string array
         // with the six categories as indicated in the Data Structure Matrix.
@@ -48,7 +51,16 @@ namespace AssessmentTwo
         // TODO: 6.5 Create a custom ValidName method which will take a parameter string value
         // from the Textbox Name and returns a Boolean after checking for duplicates.
         // Use the built in List<T> method “Exists” to answer this requirement.
-
+        private bool ValidName(string checkName)
+        {
+            if (Wiki.Exists(duplicate => duplicate.getName().Equals(checkName)))
+            {
+                statusStrip.Text = "Name already in use";
+                return false;
+            }
+            else
+                return true;
+        }
         // 6.6 Create two methods to highlight and return the values from the Radio button GroupBox.
         // The first method must return a string value from the selected radio button (Linear or Non-Linear).
         // The second method must send an integer index which will highlight an appropriate radio button.
@@ -75,7 +87,7 @@ namespace AssessmentTwo
         {
             Wiki.Sort();
             listViewDisplay.Items.Clear();
-            foreach(Information info in Wiki)
+            foreach (Information info in Wiki)
             {
                 ListViewItem lvi = new ListViewItem(info.getName());
                 lvi.SubItems.Add(info.getCategory());
