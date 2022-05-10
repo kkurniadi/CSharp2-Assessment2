@@ -163,7 +163,7 @@ namespace AssessmentTwo
         private void ResetInputs()
         {
             textBoxName.Clear();
-            comboBoxCategory.ResetText();
+            comboBoxCategory.SelectedIndex = -1;
             radioButtonLinear.Checked = false;
             radioButtonNonLin.Checked = false;
             textBoxDefinition.Clear();
