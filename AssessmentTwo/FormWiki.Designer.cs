@@ -37,8 +37,8 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.comboBoxCategory = new System.Windows.Forms.ComboBox();
             this.groupBoxStructure = new System.Windows.Forms.GroupBox();
-            this.radioButtonLinear = new System.Windows.Forms.RadioButton();
             this.radioButtonNonLin = new System.Windows.Forms.RadioButton();
+            this.radioButtonLinear = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxDefinition = new System.Windows.Forms.TextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -83,6 +83,7 @@
             this.buttonDelete.TabIndex = 2;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // label1
             // 
@@ -131,17 +132,6 @@
             this.groupBoxStructure.TabStop = false;
             this.groupBoxStructure.Text = "Structure";
             // 
-            // radioButtonLinear
-            // 
-            this.radioButtonLinear.AutoSize = true;
-            this.radioButtonLinear.Location = new System.Drawing.Point(7, 20);
-            this.radioButtonLinear.Name = "radioButtonLinear";
-            this.radioButtonLinear.Size = new System.Drawing.Size(54, 17);
-            this.radioButtonLinear.TabIndex = 0;
-            this.radioButtonLinear.TabStop = true;
-            this.radioButtonLinear.Text = "Linear";
-            this.radioButtonLinear.UseVisualStyleBackColor = true;
-            // 
             // radioButtonNonLin
             // 
             this.radioButtonNonLin.AutoSize = true;
@@ -152,6 +142,17 @@
             this.radioButtonNonLin.TabStop = true;
             this.radioButtonNonLin.Text = "Non-Linear";
             this.radioButtonNonLin.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonLinear
+            // 
+            this.radioButtonLinear.AutoSize = true;
+            this.radioButtonLinear.Location = new System.Drawing.Point(7, 20);
+            this.radioButtonLinear.Name = "radioButtonLinear";
+            this.radioButtonLinear.Size = new System.Drawing.Size(54, 17);
+            this.radioButtonLinear.TabIndex = 0;
+            this.radioButtonLinear.TabStop = true;
+            this.radioButtonLinear.Text = "Linear";
+            this.radioButtonLinear.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -234,6 +235,7 @@
             this.listViewDisplay.TabIndex = 15;
             this.listViewDisplay.UseCompatibleStateImageBehavior = false;
             this.listViewDisplay.View = System.Windows.Forms.View.Details;
+            this.listViewDisplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewDisplay_MouseClick);
             // 
             // columnName
             // 

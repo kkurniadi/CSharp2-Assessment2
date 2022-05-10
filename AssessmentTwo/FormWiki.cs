@@ -94,12 +94,26 @@ namespace AssessmentTwo
             else if (i == 1)
                 radioButtonNonLin.Checked = true;
             else
-                MessageBox.Show("Structure undefined");
+                MessageBox.Show("Structure undefined", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         // TODO: 6.7 Create a button method that will delete the currently selected record in the ListView.
         // Ensure the user has the option to backout of this action by using a dialog box.
         // Display an updated version of the sorted list at the end of this process.
-
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (listViewDisplay.SelectedIndices[0] == -1)
+            {
+                statusStrip.Text = "Please select an entry to delete";
+            }
+            else
+            {
+                int delIndex = listViewDisplay.SelectedIndices[0];
+                Wiki.RemoveAt(delIndex);
+                statusStrip.Text = "Entry has been deleted.";
+                ResetInputs();
+                DisplayAllData();
+            }
+        }
         // TODO: 6.8 Create a button method that will save the edited record of the currently selected item in the ListView.
         // All the changes in the input controls will be written back to the list.
         // Display an updated version of the sorted list at the end of this process.
@@ -124,7 +138,17 @@ namespace AssessmentTwo
 
         // TODO: 6.11 Create a ListView event so a user can select a Data Structure Name from the list of Names
         // and the associated information will be displayed in the related text boxes combo box and radio button.
-
+        private void listViewDisplay_MouseClick(object sender, MouseEventArgs e)
+        {
+            int currentEntry = listViewDisplay.SelectedIndices[0];
+            textBoxName.Text = Wiki[currentEntry].getName();
+            comboBoxCategory.SelectedItem = Wiki[currentEntry].getCategory();
+            if (Wiki[currentEntry].getStructure() == "Linear")
+                SetRadioButtons(0);
+            else if (Wiki[currentEntry].getStructure() == "Non-Linear")
+                SetRadioButtons(1);
+            textBoxDefinition.Text = Wiki[currentEntry].getDefinition();
+        }
         // 6.12 Create a custom method that will clear and reset the TextBoxes, ComboBox and Radio button
         private void ResetInputs()
         {
@@ -140,6 +164,7 @@ namespace AssessmentTwo
         {
             ResetInputs();
         }
+
         // TODO: 6.14 Create two buttons for the manual open and save option;
         // this must use a dialog box to select a file or rename a saved file.
         // All Wiki data is stored/retrieved using a binary file format.
