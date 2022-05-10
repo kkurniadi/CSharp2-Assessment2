@@ -274,6 +274,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Name = "FormWiki";
             this.Text = "Data Structures Wiki";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormWiki_FormClosed);
             this.Load += new System.EventHandler(this.FormWiki_Load);
             this.groupBoxStructure.ResumeLayout(false);
             this.groupBoxStructure.PerformLayout();
