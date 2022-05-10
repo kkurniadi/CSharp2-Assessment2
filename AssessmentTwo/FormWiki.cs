@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,6 +25,7 @@ namespace AssessmentTwo
         // 6.2 Create a global List<T> of type Information called Wiki.
         List<Information> Wiki = new List<Information>();
         string[] categories = { "Array", "List", "Tree", "Graphs", "Abstract", "Hash" };
+        string defaultFileName = "Wiki.bin";
         // 6.3 Create a button method to ADD a new item to the list.
         // Use a TextBox for the Name input, ComboBox for the Category,
         // Radio group for the Structure and Multiline TextBox for the Definition.
@@ -218,7 +220,39 @@ namespace AssessmentTwo
         // TODO: 6.14 Create two buttons for the manual open and save option;
         // this must use a dialog box to select a file or rename a saved file.
         // All Wiki data is stored/retrieved using a binary file format.
-
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveData = new SaveFileDialog
+            {
+                InitialDirectory = Application.StartupPath,
+                Filter = "BIN Files|*.bin",
+                Title = "Save file...",
+                FileName = defaultFileName,
+                DefaultExt = "bin"
+            };
+            if (saveData.ShowDialog() == DialogResult.OK)
+            {
+                SaveFile(saveData.FileName);
+            }
+            else
+                statusStrip.Text = "Cancelled saving the data";
+        }
+        private void SaveFile(string saveFileName)
+        {
+            try
+            {
+                using (Stream stream = File.Open(saveFileName, FileMode.Create))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, Wiki);
+                }
+                statusStrip.Text = "Data has been saved";
+            }
+            catch (IOException ex)
+            {
+                statusStrip.Text = ex.ToString();
+            }
+        }
         // TODO: 6.15 The Wiki application will save data when the form closes.
 
     }
