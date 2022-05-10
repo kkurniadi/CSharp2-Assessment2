@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+// Kirsten Kurniadi, ID: 30045816
+// Date: 10/05/2022
+// Assessment Task Two (Individual Project)
+// Using List<T>, Classes and Windows Forms
 namespace AssessmentTwo
 {
     public partial class FormWiki : Form
@@ -30,7 +35,7 @@ namespace AssessmentTwo
             {
                 info.setName(textBoxName.Text);
                 info.setCategory(comboBoxCategory.SelectedItem.ToString());
-                info.setStructure(CheckRadioButtons());
+                info.setStructure(GetRadioButtons());
                 info.setDefinition(textBoxDefinition.Text);
                 Wiki.Add(info);
                 ResetInputs();
@@ -53,18 +58,23 @@ namespace AssessmentTwo
         // Use the built in List<T> method “Exists” to answer this requirement.
         private bool ValidName(string checkName)
         {
+            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
             if (Wiki.Exists(duplicate => duplicate.getName().Equals(checkName)))
             {
                 statusStrip.Text = "Name already in use";
+                Trace.WriteLine(checkName + " is not a valid name");
                 return false;
             }
             else
+            {
+                Trace.WriteLine(checkName + "is valid");
                 return true;
+            }
         }
         // 6.6 Create two methods to highlight and return the values from the Radio button GroupBox.
         // The first method must return a string value from the selected radio button (Linear or Non-Linear).
         // The second method must send an integer index which will highlight an appropriate radio button.
-        private string CheckRadioButtons()
+        private string GetRadioButtons()
         {
             if (radioButtonLinear.Checked)
                 return radioButtonLinear.Text;
@@ -72,6 +82,15 @@ namespace AssessmentTwo
                 return radioButtonNonLin.Text;
             else
                 return "";
+        }
+        private void SetRadioButtons(int i)
+        {
+            if (i == 0)
+                radioButtonLinear.Checked = true;
+            else if (i == 1)
+                radioButtonNonLin.Checked = true;
+            else
+                MessageBox.Show("Structure undefined");
         }
         // TODO: 6.7 Create a button method that will delete the currently selected record in the ListView.
         // Ensure the user has the option to backout of this action by using a dialog box.
