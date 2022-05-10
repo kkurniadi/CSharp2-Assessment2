@@ -24,7 +24,6 @@ namespace AssessmentTwo
         // 6.2 Create a global List<T> of type Information called Wiki.
         List<Information> Wiki = new List<Information>();
         string[] categories = { "Array", "List", "Tree", "Graphs", "Abstract", "Hash" };
-
         // 6.3 Create a button method to ADD a new item to the list.
         // Use a TextBox for the Name input, ComboBox for the Category,
         // Radio group for the Structure and Multiline TextBox for the Definition.
@@ -71,7 +70,7 @@ namespace AssessmentTwo
             }
             else
             {
-                Trace.WriteLine(checkName + " is valid");
+                Trace.WriteLine(checkName + " is a valid name");
                 return true;
             }
         }
@@ -96,7 +95,7 @@ namespace AssessmentTwo
             else
                 MessageBox.Show("Structure undefined", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        // TODO: 6.7 Create a button method that will delete the currently selected record in the ListView.
+        // 6.7 Create a button method that will delete the currently selected record in the ListView.
         // Ensure the user has the option to backout of this action by using a dialog box.
         // Display an updated version of the sorted list at the end of this process.
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -105,17 +104,17 @@ namespace AssessmentTwo
             if (listViewDisplay.SelectedIndices.Count == 0)
             {
                 statusStrip.Text = "Please select an entry to delete";
-                Trace.WriteLine("Nothing selected");
+                Trace.WriteLine("Pressed delete but nothing selected");
             }
             else
             {
                 int delIndex = listViewDisplay.SelectedIndices[0];
-                Trace.WriteLine(delIndex);
                 DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirmation", 
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
                 {
                     Wiki.RemoveAt(delIndex);
+                    Trace.WriteLine("Deleted at index " + delIndex);
                     statusStrip.Text = "Entry has been deleted.";
                     ResetInputs();
                     DisplayAllData();
@@ -125,7 +124,28 @@ namespace AssessmentTwo
         // TODO: 6.8 Create a button method that will save the edited record of the currently selected item in the ListView.
         // All the changes in the input controls will be written back to the list.
         // Display an updated version of the sorted list at the end of this process.
-
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+            if (listViewDisplay.SelectedIndices.Count == 0)
+            {
+                statusStrip.Text = "Please select an entry to edit";
+                Trace.WriteLine("Pressed edit but nothing selected");
+            }
+            else
+            {
+                int editIndex = listViewDisplay.SelectedIndices[0];
+                Information editInfo = Wiki.ElementAt(editIndex);
+                editInfo.setName(textBoxName.Text);
+                editInfo.setCategory(comboBoxCategory.SelectedItem.ToString());
+                editInfo.setStructure(GetRadioButtons());
+                editInfo.setDefinition(textBoxDefinition.Text);
+                ResetInputs();
+                DisplayAllData();
+                Trace.WriteLine("Edited entry at " + editIndex);
+                statusStrip.Text = "Entry edited.";
+            }
+        }
         // 6.9 Create a single custom method that will sort and then display
         // the Name and Category from the wiki information in the list.
         private void DisplayAllData()
@@ -144,7 +164,7 @@ namespace AssessmentTwo
         // the appropriate input controls and highlight the name in the ListView.
         // At the end of the search process the search input TextBox must be cleared.
 
-        // TODO: 6.11 Create a ListView event so a user can select a Data Structure Name from the list of Names
+        // 6.11 Create a ListView event so a user can select a Data Structure Name from the list of Names
         // and the associated information will be displayed in the related text boxes combo box and radio button.
         private void listViewDisplay_MouseClick(object sender, MouseEventArgs e)
         {
@@ -168,13 +188,13 @@ namespace AssessmentTwo
             radioButtonNonLin.Checked = false;
             textBoxDefinition.Clear();
         }
-
         // 6.13 Create a double click event on the Name TextBox to clear the TextBoxes, ComboBox and Radio button.
         private void textBoxName_DoubleClick(object sender, EventArgs e)
         {
             ResetInputs();
         }
 
+        
         // TODO: 6.14 Create two buttons for the manual open and save option;
         // this must use a dialog box to select a file or rename a saved file.
         // All Wiki data is stored/retrieved using a binary file format.
