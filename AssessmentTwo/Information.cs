@@ -21,6 +21,11 @@ namespace AssessmentTwo
         public Information()
         { }
 
+        public Information(string itemName)
+        {
+            Name = itemName;
+        }
+
         public Information(string itemName, string itemCategory, string itemStructure, string itemDefinition)
         {
             Name = itemName;

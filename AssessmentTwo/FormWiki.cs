@@ -114,14 +114,14 @@ namespace AssessmentTwo
                 if (result == DialogResult.OK)
                 {
                     Wiki.RemoveAt(delIndex);
-                    Trace.WriteLine("Deleted at index " + delIndex);
                     statusStrip.Text = "Entry has been deleted.";
                     ResetInputs();
                     DisplayAllData();
+                    Trace.WriteLine("Deleted at index " + delIndex);
                 }
             }
         }
-        // TODO: 6.8 Create a button method that will save the edited record of the currently selected item in the ListView.
+        // 6.8 Create a button method that will save the edited record of the currently selected item in the ListView.
         // All the changes in the input controls will be written back to the list.
         // Display an updated version of the sorted list at the end of this process.
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -142,8 +142,8 @@ namespace AssessmentTwo
                 editInfo.setDefinition(textBoxDefinition.Text);
                 ResetInputs();
                 DisplayAllData();
-                Trace.WriteLine("Edited entry at " + editIndex);
                 statusStrip.Text = "Entry edited.";
+                Trace.WriteLine("Edited entry at " + editIndex);
             }
         }
         // 6.9 Create a single custom method that will sort and then display
@@ -159,25 +159,46 @@ namespace AssessmentTwo
                 listViewDisplay.Items.Add(lvi);
             }
         }
-        // TODO: 6.10 Create a button method that will use the builtin binary search to find a Data Structure name.
+        // 6.10 Create a button method that will use the builtin binary search to find a Data Structure name.
         // If the record is found the associated details will populate
         // the appropriate input controls and highlight the name in the ListView.
         // At the end of the search process the search input TextBox must be cleared.
-
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            Information target = new Information(textBoxSearch.Text);
+            int found = Wiki.BinarySearch(target);
+            if (found >= 0)
+            {
+                listViewDisplay.SelectedItems.Clear();
+                listViewDisplay.Items[found].Selected = true;
+                DisplayForOne(found);
+                statusStrip.Text = "Entry found";
+            }
+            else
+            {
+                ResetInputs();
+                statusStrip.Text = "Not found";
+            }
+            textBoxSearch.Clear();
+        }
         // 6.11 Create a ListView event so a user can select a Data Structure Name from the list of Names
         // and the associated information will be displayed in the related text boxes combo box and radio button.
         private void listViewDisplay_MouseClick(object sender, MouseEventArgs e)
         {
             int currentEntry = listViewDisplay.SelectedIndices[0];
-            textBoxName.Text = Wiki[currentEntry].getName();
-            int catIndex = comboBoxCategory.FindString(Wiki[currentEntry].getCategory());
+            DisplayForOne(currentEntry);
+        }
+        private void DisplayForOne(int x)
+        {
+            textBoxName.Text = Wiki[x].getName();
+            int catIndex = comboBoxCategory.FindString(Wiki[x].getCategory());
             if (catIndex != -1)
                 comboBoxCategory.SelectedIndex = catIndex;
-            if (Wiki[currentEntry].getStructure() == "Linear")
+            if (Wiki[x].getStructure() == "Linear")
                 SetRadioButtons(0);
-            else if (Wiki[currentEntry].getStructure() == "Non-Linear")
+            else if (Wiki[x].getStructure() == "Non-Linear")
                 SetRadioButtons(1);
-            textBoxDefinition.Text = Wiki[currentEntry].getDefinition();
+            textBoxDefinition.Text = Wiki[x].getDefinition();
         }
         // 6.12 Create a custom method that will clear and reset the TextBoxes, ComboBox and Radio button
         private void ResetInputs()
@@ -194,7 +215,6 @@ namespace AssessmentTwo
             ResetInputs();
         }
 
-        
         // TODO: 6.14 Create two buttons for the manual open and save option;
         // this must use a dialog box to select a file or rename a saved file.
         // All Wiki data is stored/retrieved using a binary file format.
