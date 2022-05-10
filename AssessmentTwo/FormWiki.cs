@@ -48,6 +48,10 @@ namespace AssessmentTwo
         // Create a custom method to populate the ComboBox when the Form Load method is called.
         private void FormWiki_Load(object sender, EventArgs e)
         {
+            FillComboBox();
+        }
+        private void FillComboBox()
+        {
             foreach (string cat in categories)
             {
                 comboBoxCategory.Items.Add(cat);
