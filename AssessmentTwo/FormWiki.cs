@@ -220,6 +220,41 @@ namespace AssessmentTwo
         // TODO: 6.14 Create two buttons for the manual open and save option;
         // this must use a dialog box to select a file or rename a saved file.
         // All Wiki data is stored/retrieved using a binary file format.
+        private void buttonOpen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openData = new OpenFileDialog
+            {
+                InitialDirectory = Application.StartupPath,
+                Filter = "BIN Files|*.bin",
+                Title = "Open file..."
+            };
+            if (openData.ShowDialog() == DialogResult.OK)
+            {
+                OpenFile(openData.FileName);
+            }
+            else
+                statusStrip.Text = "Cancelled file opening";
+        }
+        private void OpenFile(string openFileName)
+        {
+            try
+            {
+                using (Stream stream = File.Open(openFileName, FileMode.Open))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    while (stream.Position < stream.Length)
+                    {
+                        Wiki = (List<Information>) bin.Deserialize(stream);
+                    }
+                    DisplayAllData();
+                }
+                statusStrip.Text = "Opened data from file";
+            }
+            catch (IOException ex)
+            {
+                statusStrip.Text = ex.ToString();
+            }
+        }
         private void buttonSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveData = new SaveFileDialog
