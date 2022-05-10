@@ -101,15 +101,19 @@ namespace AssessmentTwo
         // Display an updated version of the sorted list at the end of this process.
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if (listViewDisplay.SelectedIndices[0] == -1)
+            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+            if (listViewDisplay.SelectedIndices.Count == 0)
             {
                 statusStrip.Text = "Please select an entry to delete";
+                Trace.WriteLine("Nothing selected");
             }
             else
             {
                 int delIndex = listViewDisplay.SelectedIndices[0];
-                MessageBox.Show("Are you sure you want to delete?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (DialogResult == DialogResult.OK)
+                Trace.WriteLine(delIndex);
+                DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirmation", 
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (result == DialogResult.OK)
                 {
                     Wiki.RemoveAt(delIndex);
                     statusStrip.Text = "Entry has been deleted.";
