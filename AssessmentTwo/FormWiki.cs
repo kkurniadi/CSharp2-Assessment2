@@ -71,7 +71,7 @@ namespace AssessmentTwo
             }
             else
             {
-                Trace.WriteLine(checkName + "is valid");
+                Trace.WriteLine(checkName + " is valid");
                 return true;
             }
         }
@@ -108,10 +108,14 @@ namespace AssessmentTwo
             else
             {
                 int delIndex = listViewDisplay.SelectedIndices[0];
-                Wiki.RemoveAt(delIndex);
-                statusStrip.Text = "Entry has been deleted.";
-                ResetInputs();
-                DisplayAllData();
+                MessageBox.Show("Are you sure you want to delete?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (DialogResult == DialogResult.OK)
+                {
+                    Wiki.RemoveAt(delIndex);
+                    statusStrip.Text = "Entry has been deleted.";
+                    ResetInputs();
+                    DisplayAllData();
+                }
             }
         }
         // TODO: 6.8 Create a button method that will save the edited record of the currently selected item in the ListView.
@@ -142,7 +146,9 @@ namespace AssessmentTwo
         {
             int currentEntry = listViewDisplay.SelectedIndices[0];
             textBoxName.Text = Wiki[currentEntry].getName();
-            comboBoxCategory.SelectedItem = Wiki[currentEntry].getCategory();
+            int catIndex = comboBoxCategory.FindString(Wiki[currentEntry].getCategory());
+            if (catIndex != -1)
+                comboBoxCategory.SelectedIndex = catIndex;
             if (Wiki[currentEntry].getStructure() == "Linear")
                 SetRadioButtons(0);
             else if (Wiki[currentEntry].getStructure() == "Non-Linear")
