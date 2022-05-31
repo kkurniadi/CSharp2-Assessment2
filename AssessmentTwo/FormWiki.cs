@@ -55,21 +55,25 @@ namespace AssessmentTwo
                         else
                         {
                             MessageBox.Show("Please enter a definition.", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            statusStrip.Text = "-";
                         }
                     }
                     else
                     {
                         MessageBox.Show("Please select a structure.", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        statusStrip.Text = "-";
                     }
                 } 
                 else
                 {
                     MessageBox.Show("Please select a category from the box.", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    statusStrip.Text = "-";
                 }
             }
             else
             {
                 MessageBox.Show("Please enter a name.", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                statusStrip.Text = "-";
             }
         }
         // 6.4 Create and initialise a global string array
@@ -97,6 +101,7 @@ namespace AssessmentTwo
             {
                 MessageBox.Show("Name already in use", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Trace.WriteLine(checkName + " is not a valid name");
+                statusStrip.Text = "-";
                 return false;
             }
             else
