@@ -135,15 +135,10 @@ namespace AssessmentTwo
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
-            if (listViewDisplay.SelectedIndices.Count == 0)
-            {
-                statusStrip.Text = "Please select an entry to delete";
-                Trace.WriteLine("Pressed delete but nothing selected");
-            }
-            else
+            if (listViewDisplay.SelectedIndices.Count > 0)
             {
                 int delIndex = listViewDisplay.SelectedIndices[0];
-                DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirmation", 
+                DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirmation",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
                 {
@@ -154,6 +149,11 @@ namespace AssessmentTwo
                     Trace.WriteLine("Deleted at index " + delIndex);
                 }
             }
+            else
+            {
+                MessageBox.Show("Please select an entry to delete", "Delete Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Trace.WriteLine("Pressed delete but nothing selected");
+            }
         }
         // 6.8 Create a button method that will save the edited record of the currently selected item in the ListView.
         // All the changes in the input controls will be written back to the list.
@@ -161,12 +161,7 @@ namespace AssessmentTwo
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
-            if (listViewDisplay.SelectedIndices.Count == 0)
-            {
-                statusStrip.Text = "Please select an entry to edit";
-                Trace.WriteLine("Pressed edit but nothing selected");
-            }
-            else
+            if (listViewDisplay.SelectedIndices.Count > 0)
             {
                 int editIndex = listViewDisplay.SelectedIndices[0];
                 Information editInfo = Wiki.ElementAt(editIndex);
@@ -177,7 +172,12 @@ namespace AssessmentTwo
                 ResetInputs();
                 DisplayAllData();
                 statusStrip.Text = "Entry edited.";
-                Trace.WriteLine("Edited entry at " + editIndex);
+                Trace.WriteLine("Edited entry at index " + editIndex);
+            }
+            else
+            {
+                MessageBox.Show("Please select an entry to edit", "Edit Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Trace.WriteLine("Pressed edit but nothing selected");
             }
         }
         // 6.9 Create a single custom method that will sort and then display
