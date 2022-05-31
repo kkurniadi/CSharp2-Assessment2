@@ -32,7 +32,7 @@ namespace AssessmentTwo
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             Information info = new Information();
-            if (!string.IsNullOrWhiteSpace(textBoxName.Text))
+            if (!string.IsNullOrWhiteSpace(textBoxName.Text) && ValidName(textBoxName.Text))
             {
                 if (comboBoxCategory.SelectedItem != null)
                 {
@@ -40,17 +40,14 @@ namespace AssessmentTwo
                     {
                         if (!string.IsNullOrWhiteSpace(textBoxDefinition.Text))
                         {
-                            if (ValidName(textBoxName.Text))
-                            {
-                                info.setName(textBoxName.Text);
-                                info.setCategory(comboBoxCategory.SelectedItem.ToString());
-                                info.setStructure(GetRadioButtons());
-                                info.setDefinition(textBoxDefinition.Text);
-                                Wiki.Add(info);
-                                ResetInputs();
-                                DisplayAllData();
-                                statusStrip.Text = "New entry added.";
-                            }  
+                            info.setName(textBoxName.Text);
+                            info.setCategory(comboBoxCategory.SelectedItem.ToString());
+                            info.setStructure(GetRadioButtons());
+                            info.setDefinition(textBoxDefinition.Text);
+                            Wiki.Add(info);
+                            ResetInputs();
+                            DisplayAllData();
+                            statusStrip.Text = "New entry added."; 
                         }
                         else
                         {
@@ -70,7 +67,7 @@ namespace AssessmentTwo
                     statusStrip.Text = "-";
                 }
             }
-            else
+            else if (string.IsNullOrWhiteSpace(textBoxName.Text))
             {
                 MessageBox.Show("Please enter a name.", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 statusStrip.Text = "-";
