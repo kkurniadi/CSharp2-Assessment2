@@ -32,23 +32,41 @@ namespace AssessmentTwo
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             Information info = new Information();
-            if (ValidName(textBoxName.Text))
+            if (ValidName(textBoxName.Text) && !string.IsNullOrWhiteSpace(textBoxName.Text))
             {
                 if (comboBoxCategory.SelectedItem != null)
                 {
-                    info.setName(textBoxName.Text);
-                    info.setCategory(comboBoxCategory.SelectedItem.ToString());
-                    info.setStructure(GetRadioButtons());
-                    info.setDefinition(textBoxDefinition.Text);
-                    Wiki.Add(info);
-                    ResetInputs();
-                    DisplayAllData();
-                    statusStrip.Text = "New entry added.";
+                    if (!string.IsNullOrEmpty(GetRadioButtons()))
+                    {
+                        if (!string.IsNullOrWhiteSpace(textBoxDefinition.Text))
+                        {
+                            info.setName(textBoxName.Text);
+                            info.setCategory(comboBoxCategory.SelectedItem.ToString());
+                            info.setStructure(GetRadioButtons());
+                            info.setDefinition(textBoxDefinition.Text);
+                            Wiki.Add(info);
+                            ResetInputs();
+                            DisplayAllData();
+                            statusStrip.Text = "New entry added.";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter a definition.", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select a structure.", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 } 
                 else
                 {
-                    MessageBox.Show("Please select a category from the box", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please select a category from the box.", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+            }
+            else if (string.IsNullOrWhiteSpace(textBoxName.Text))
+            {
+                MessageBox.Show("Please enter a name.", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         // 6.4 Create and initialise a global string array
@@ -74,7 +92,7 @@ namespace AssessmentTwo
             Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
             if (Wiki.Exists(duplicate => duplicate.getName().Equals(checkName)))
             {
-                statusStrip.Text = "Name already in use";
+                MessageBox.Show("Name already in use", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Trace.WriteLine(checkName + " is not a valid name");
                 return false;
             }
