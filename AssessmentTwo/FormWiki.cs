@@ -148,6 +148,11 @@ namespace AssessmentTwo
                     DisplayAllData();
                     Trace.WriteLine("Deleted at index " + delIndex);
                 }
+                else
+                {
+                    statusStrip.Text = "Cancelled entry deletion.";
+                    Trace.WriteLine("Cancelled deletion at index " + delIndex);
+                }
             }
             else
             {
