@@ -124,7 +124,10 @@ namespace AssessmentTwo
             else if (i == 1)
                 radioButtonNonLin.Checked = true;
             else
-                MessageBox.Show("Structure undefined", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                radioButtonLinear.Checked = false;
+                radioButtonNonLin.Checked = false;
+            }
         }
         // 6.7 Create a button method that will delete the currently selected record in the ListView.
         // Ensure the user has the option to backout of this action by using a dialog box.
@@ -236,8 +239,7 @@ namespace AssessmentTwo
         {
             textBoxName.Clear();
             comboBoxCategory.SelectedIndex = -1;
-            radioButtonLinear.Checked = false;
-            radioButtonNonLin.Checked = false;
+            SetRadioButtons(-1);
             textBoxDefinition.Clear();
         }
         // 6.13 Create a double click event on the Name TextBox to clear the TextBoxes, ComboBox and Radio button.
