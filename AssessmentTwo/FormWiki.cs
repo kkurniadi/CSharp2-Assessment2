@@ -32,7 +32,7 @@ namespace AssessmentTwo
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             Information info = new Information();
-            if (ValidName(textBoxName.Text) && !string.IsNullOrWhiteSpace(textBoxName.Text))
+            if (!string.IsNullOrWhiteSpace(textBoxName.Text))
             {
                 if (comboBoxCategory.SelectedItem != null)
                 {
@@ -40,14 +40,17 @@ namespace AssessmentTwo
                     {
                         if (!string.IsNullOrWhiteSpace(textBoxDefinition.Text))
                         {
-                            info.setName(textBoxName.Text);
-                            info.setCategory(comboBoxCategory.SelectedItem.ToString());
-                            info.setStructure(GetRadioButtons());
-                            info.setDefinition(textBoxDefinition.Text);
-                            Wiki.Add(info);
-                            ResetInputs();
-                            DisplayAllData();
-                            statusStrip.Text = "New entry added.";
+                            if (ValidName(textBoxName.Text))
+                            {
+                                info.setName(textBoxName.Text);
+                                info.setCategory(comboBoxCategory.SelectedItem.ToString());
+                                info.setStructure(GetRadioButtons());
+                                info.setDefinition(textBoxDefinition.Text);
+                                Wiki.Add(info);
+                                ResetInputs();
+                                DisplayAllData();
+                                statusStrip.Text = "New entry added.";
+                            }  
                         }
                         else
                         {
@@ -64,7 +67,7 @@ namespace AssessmentTwo
                     MessageBox.Show("Please select a category from the box.", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            else if (string.IsNullOrWhiteSpace(textBoxName.Text))
+            else
             {
                 MessageBox.Show("Please enter a name.", "Add Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
