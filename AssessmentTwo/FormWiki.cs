@@ -24,7 +24,7 @@ namespace AssessmentTwo
         }
         // 6.2 Create a global List<T> of type Information called Wiki.
         List<Information> Wiki = new List<Information>();
-        string[] categories = { "Array", "List", "Tree", "Graphs", "Abstract", "Hash" };
+        
         string defaultFileName = "Wiki.bin";
         // 6.3 Create a button method to ADD a new item to the list.
         // Use a TextBox for the Name input, ComboBox for the Category,
@@ -34,14 +34,21 @@ namespace AssessmentTwo
             Information info = new Information();
             if (ValidName(textBoxName.Text))
             {
-                info.setName(textBoxName.Text);
-                info.setCategory(comboBoxCategory.SelectedItem.ToString());
-                info.setStructure(GetRadioButtons());
-                info.setDefinition(textBoxDefinition.Text);
-                Wiki.Add(info);
-                ResetInputs();
-                DisplayAllData();
-                statusStrip.Text = "New entry added.";
+                if (comboBoxCategory.SelectedItem != null)
+                {
+                    info.setName(textBoxName.Text);
+                    info.setCategory(comboBoxCategory.SelectedItem.ToString());
+                    info.setStructure(GetRadioButtons());
+                    info.setDefinition(textBoxDefinition.Text);
+                    Wiki.Add(info);
+                    ResetInputs();
+                    DisplayAllData();
+                    statusStrip.Text = "New entry added.";
+                } 
+                else
+                {
+                    MessageBox.Show("Please select a category from the box", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
         // 6.4 Create and initialise a global string array
@@ -53,6 +60,7 @@ namespace AssessmentTwo
         }
         private void FillComboBox()
         {
+            string[] categories = File.ReadAllLines(@"categories.txt");
             foreach (string cat in categories)
             {
                 comboBoxCategory.Items.Add(cat);
