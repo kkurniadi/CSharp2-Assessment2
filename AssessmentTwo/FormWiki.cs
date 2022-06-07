@@ -82,7 +82,13 @@ namespace AssessmentTwo
         }
         private void FillComboBox()
         {
-            string[] categories = File.ReadAllLines(@"categories.txt");
+            string catFile = @"categories.txt";
+            if (!File.Exists(catFile))
+            {
+                string[] addCategories = { "Array", "List", "Tree", "Graphs", "Abstract", "Hash" };
+                File.WriteAllLines(catFile, addCategories);
+            }
+            string[] categories = File.ReadAllLines(catFile);
             foreach (string cat in categories)
             {
                 comboBoxCategory.Items.Add(cat);
