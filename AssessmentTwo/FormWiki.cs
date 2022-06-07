@@ -235,9 +235,9 @@ namespace AssessmentTwo
             int catIndex = comboBoxCategory.FindString(Wiki[x].getCategory());
             if (catIndex != -1)
                 comboBoxCategory.SelectedIndex = catIndex;
-            if (Wiki[x].getStructure() == "Linear")
+            if (Wiki[x].getStructure().Equals(radioButtonLinear.Text))
                 SetRadioButtons(0);
-            else if (Wiki[x].getStructure() == "Non-Linear")
+            else if (Wiki[x].getStructure().Equals(radioButtonNonLin.Text))
                 SetRadioButtons(1);
             textBoxDefinition.Text = Wiki[x].getDefinition();
         }
