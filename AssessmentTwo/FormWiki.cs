@@ -295,6 +295,7 @@ namespace AssessmentTwo
         // 6.14 Create two buttons for the manual open and save option;
         // this must use a dialog box to select a file or rename a saved file.
         // All Wiki data is stored/retrieved using a binary file format.
+        #region FileIO
         private void buttonOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog openData = new OpenFileDialog
@@ -364,6 +365,7 @@ namespace AssessmentTwo
                 statusStrip.Text = ex.ToString();
             }
         }
+        #endregion FileIO
         // 6.15 The Wiki application will save data when the form closes.
         private void FormWiki_FormClosed(object sender, FormClosedEventArgs e)
         {
