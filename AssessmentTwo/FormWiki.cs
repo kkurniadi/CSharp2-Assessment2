@@ -119,14 +119,19 @@ namespace AssessmentTwo
         }
         private void textBoxName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar))
-                e.Handled = true;
+            HandleKeyPress(e);
         }
 
         private void textBoxDefinition_KeyPress(object sender, KeyPressEventArgs e)
         {
+            HandleKeyPress(e);
+        }
+        private void HandleKeyPress(KeyPressEventArgs e)
+        {
             if (char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar))
+            {
                 e.Handled = true;
+            }
         }
         // 6.6 Create two methods to highlight and return the values from the Radio button GroupBox.
         // The first method must return a string value from the selected radio button (Linear or Non-Linear).
