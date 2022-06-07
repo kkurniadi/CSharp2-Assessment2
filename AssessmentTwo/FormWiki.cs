@@ -247,6 +247,7 @@ namespace AssessmentTwo
                 statusStrip.Text = "Not found";
             }
             textBoxSearch.Clear();
+            textBoxSearch.Focus();
         }
         // The user can select a Data Structure name from the list of Names
         // and the associated information will be displayed in the related text boxes.
