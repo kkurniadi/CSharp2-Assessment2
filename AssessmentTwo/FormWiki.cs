@@ -321,6 +321,7 @@ namespace AssessmentTwo
                     {
                         Wiki = (List<Information>) bin.Deserialize(stream);
                     }
+                    ResetInputs();
                     DisplayAllData();
                 }
                 statusStrip.Text = "Opened data from file";
@@ -368,7 +369,5 @@ namespace AssessmentTwo
         {
             SaveFile(defaultFileName);
         }
-
-       
     }
 }
