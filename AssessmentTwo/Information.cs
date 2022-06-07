@@ -9,6 +9,8 @@ namespace AssessmentTwo
     [Serializable]
     internal class Information : IComparable<Information>
     {
+        // The Wiki application must use a List<T> of a simple class which implements an IComparable<T> interface
+        // This single class must have the following attributes: Name, Category, Structure and Definition
         // 6.1 Create a separate class file to hold the four data items of the Data Structure
         // (use the Data Structure Matrix as a guide).
         // Use auto-implemented properties for the fields which must be of type “string”.

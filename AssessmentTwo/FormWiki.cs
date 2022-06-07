@@ -22,10 +22,14 @@ namespace AssessmentTwo
         {
             InitializeComponent();
         }
+        // The Wiki application must use a List<T> of a simple class which implements an IComparable<T> interface.
         // 6.2 Create a global List<T> of type Information called Wiki.
         List<Information> Wiki = new List<Information>();
         
         string defaultFileName = "Wiki.bin";
+        // Following the success of the prototype, management would like the user to have
+        // the following functionality: user can add, edit and delete Data Structure information.
+        // During this process the system must be able to prevent duplicates and filter out numeric or special character input. 
         // 6.3 Create a button method to ADD a new item to the list.
         // Use a TextBox for the Name input, ComboBox for the Category,
         // Radio group for the Structure and Multiline TextBox for the Definition.
@@ -112,6 +116,17 @@ namespace AssessmentTwo
                 Trace.WriteLine(checkName + " is a valid name");
                 return true;
             }
+        }
+        private void textBoxName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void textBoxDefinition_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar))
+                e.Handled = true;
         }
         // 6.6 Create two methods to highlight and return the values from the Radio button GroupBox.
         // The first method must return a string value from the selected radio button (Linear or Non-Linear).
@@ -206,6 +221,11 @@ namespace AssessmentTwo
                 listViewDisplay.Items.Add(lvi);
             }
         }
+        // The application must have a search feature so a user can find a specific Data Structure
+        // by entering the Name into the search textbox and clicking the search button,
+        // if found the associated information will be displayed in the related text boxes.
+        // The search textbox must clear when the search is completed and refocus the I beam icon into textbox.
+        // After a successful search the Data Structure Name in the list must be highlighted;
         // 6.10 Create a button method that will use the builtin binary search to find a Data Structure name.
         // If the record is found the associated details will populate
         // the appropriate input controls and highlight the name in the ListView.
@@ -228,6 +248,8 @@ namespace AssessmentTwo
             }
             textBoxSearch.Clear();
         }
+        // The user can select a Data Structure name from the list of Names
+        // and the associated information will be displayed in the related text boxes.
         // 6.11 Create a ListView event so a user can select a Data Structure Name from the list of Names
         // and the associated information will be displayed in the related text boxes combo box and radio button.
         private void listViewDisplay_MouseClick(object sender, MouseEventArgs e)
@@ -255,12 +277,15 @@ namespace AssessmentTwo
             SetRadioButtons(-1);
             textBoxDefinition.Clear();
         }
+        // a double mouse click in the Name input box which will clear all textboxes, this must have an associated tool tip.
         // 6.13 Create a double click event on the Name TextBox to clear the TextBoxes, ComboBox and Radio button.
         private void textBoxName_DoubleClick(object sender, EventArgs e)
         {
             ResetInputs();
         }
-
+        // There are two buttons for the manual open and save option;
+        // this must use a dialog box to select a file or rename a saved file.
+        // All wiki data is stored/retrieved using a binary file format.
         // 6.14 Create two buttons for the manual open and save option;
         // this must use a dialog box to select a file or rename a saved file.
         // All Wiki data is stored/retrieved using a binary file format.
@@ -337,5 +362,7 @@ namespace AssessmentTwo
         {
             SaveFile(defaultFileName);
         }
+
+       
     }
 }

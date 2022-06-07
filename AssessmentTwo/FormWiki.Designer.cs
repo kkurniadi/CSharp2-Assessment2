@@ -112,6 +112,7 @@
             this.textBoxName.TabIndex = 5;
             this.toolTip1.SetToolTip(this.textBoxName, "Enter data structure name. Double-click to clear all input fields.");
             this.textBoxName.DoubleClick += new System.EventHandler(this.textBoxName_DoubleClick);
+            this.textBoxName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxName_KeyPress);
             // 
             // comboBoxCategory
             // 
@@ -171,6 +172,7 @@
             this.textBoxDefinition.Name = "textBoxDefinition";
             this.textBoxDefinition.Size = new System.Drawing.Size(200, 123);
             this.textBoxDefinition.TabIndex = 9;
+            this.textBoxDefinition.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDefinition_KeyPress);
             // 
             // toolStrip1
             // 
